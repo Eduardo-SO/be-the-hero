@@ -10,35 +10,31 @@ import {
     FormSection,
 } from '../_layouts/FormPage/styles';
 
-export default function Register() {
+export default function NewIncident() {
     return (
         <Wrapper>
             <Container>
                 <LeftSection>
                     <img src={logo} alt="Be The Hero" />
 
-                    <h1>Faça seu registro</h1>
+                    <h1>Cadastrar novo caso</h1>
 
                     <p>
-                        Faça seu cadastro, entre na plataforma e ajude pessoas a
-                        encontrarem os casos da sua ONG.
+                        Descreva o caso detalhadamente para encontrar um herói
+                        para resolver isso.
                     </p>
 
-                    <Link className="icon-link" to="/">
+                    <Link className="icon-link" to="/profile">
                         <FiArrowLeft size={16} color="#E02041" />
-                        Já tenho cadastro
+                        Voltar para home
                     </Link>
                 </LeftSection>
 
                 <FormSection>
                     <form>
-                        <input placeholder="Sua ID" />
-                        <input type="email" placeholder="E-mail" />
-                        <input type="tel" placeholder="WhatsApp" />
-                        <div className="input-group">
-                            <input placeholder="Cidade" />
-                            <input placeholder="UF" />
-                        </div>
+                        <input placeholder="Titulo do caso" />
+                        <textarea placeholder="Descrição" />
+                        <input placeholder="Valor em reais" />
 
                         <button type="submit" className="button">
                             Cadastrar

@@ -24,7 +24,7 @@ body {
     background-color: #f0f0f5;
 }
 
-body, input, button {
+body, input, button, textarea {
     font: 400 14px 'Roboto', sans-serif;
 }
 
@@ -45,13 +45,27 @@ ul {
     list-style: none;
 }
 
-form input {
-    width: 100%;
-    height: 60px;
-    padding: 0 24px;
-    border: 1px solid #dcdce6;
-    border-radius: 8px;
-    color: #333;
+form {
+    input {
+        width: 100%;
+        height: 60px;
+        padding: 0 24px;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+        color: #333;
+    }
+    textarea {
+        width: 100%;
+        min-height: 140px;
+        height: 140px;
+        max-height: 340px;
+        padding: 16px 24px;
+        border: 1px solid #dcdce6;
+        border-radius: 8px;
+        color: #333;
+        line-height: 24px;
+        resize: vertical;
+    }
 }
 
 .button {

@@ -11,7 +11,7 @@ export default function Header() {
             <img src={logo} alt="Be The Hero" />
             <span>Bem vinda, APAD</span>
 
-            <Link className="button" to="/profile/new/incidents">
+            <Link className="button" to="/incidents/new">
                 Cadastrar novo caso
             </Link>
             <button type="button">
