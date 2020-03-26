@@ -25,6 +25,7 @@ export const Container = styled.div`
             background: #fff;
             padding: 24px;
             border-radius: 8px;
+            box-shadow: 0 0 15px rgba(100, 100, 100, 0.1);
 
             position: relative;
 

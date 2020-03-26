@@ -1,11 +1,45 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 
+import api from '~/services/api';
 import { Container } from './styles';
 import Header from '~/Components/Header';
 
 export default function Profile() {
+    const [incidents, setIncidents] = useState([]);
+
+    const ongId = localStorage.getItem('ongId');
+
+    useEffect(() => {
+        async function loadIncidents() {
+            api.get('profile', {
+                headers: {
+                    Authorization: ongId,
+                },
+            }).then((response) => {
+                setIncidents(response.data);
+            });
+        }
+
+        loadIncidents();
+    }, [ongId]);
+
+    async function handleDeleteIncident(id) {
+        const confirm = window.confirm(
+            'Você realmente deseja excluir este caso?'
+        );
+
+        if (!confirm) return;
+
+        await api.delete(`incidents/${id}`, {
+            headers: {
+                Authorization: ongId,
+            },
+        });
+
+        setIncidents(incidents.filter((incident) => incident.id !== id));
+    }
+
     return (
         <>
             <Header />
@@ -13,65 +47,32 @@ export default function Profile() {
                 <h1>Casos cadastrados</h1>
 
                 <ul>
-                    <li>
-                        <strong>CASO:</strong>
-                        <p>Caso teste</p>
+                    {incidents.map((incident) => (
+                        <li key={incident.id}>
+                            <strong>CASO:</strong>
+                            <p>{incident.title}</p>
 
-                        <strong>DESCRIÇÃO:</strong>
-                        <p>Descrição teste</p>
+                            <strong>DESCRIÇÃO:</strong>
+                            <p>{incident.description}</p>
 
-                        <strong>VALOR:</strong>
-                        <p>R$ 120,00</p>
+                            <strong>VALOR:</strong>
+                            <p>
+                                {Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL',
+                                }).format(incident.value)}
+                            </p>
 
-                        <button type="button">
-                            <FiTrash2 size={16} />
-                        </button>
-                    </li>
-
-                    <li>
-                        <strong>CASO 2:</strong>
-                        <p>Caso teste</p>
-
-                        <strong>DESCRIÇÃO:</strong>
-                        <p>Descrição teste</p>
-
-                        <strong>VALOR:</strong>
-                        <p>R$ 120,00</p>
-
-                        <button type="button">
-                            <FiTrash2 size={16} />
-                        </button>
-                    </li>
-
-                    <li>
-                        <strong>CASO:</strong>
-                        <p>Caso teste</p>
-
-                        <strong>DESCRIÇÃO:</strong>
-                        <p>Descrição teste</p>
-
-                        <strong>VALOR:</strong>
-                        <p>R$ 120,00</p>
-
-                        <button type="button">
-                            <FiTrash2 size={16} />
-                        </button>
-                    </li>
-
-                    <li>
-                        <strong>CASO:</strong>
-                        <p>Caso teste</p>
-
-                        <strong>DESCRIÇÃO:</strong>
-                        <p>Descrição teste</p>
-
-                        <strong>VALOR:</strong>
-                        <p>R$ 120,00</p>
-
-                        <button type="button">
-                            <FiTrash2 size={16} />
-                        </button>
-                    </li>
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    handleDeleteIncident(incident.id)
+                                }
+                            >
+                                <FiTrash2 size={16} />
+                            </button>
+                        </li>
+                    ))}
                 </ul>
             </Container>
         </>
