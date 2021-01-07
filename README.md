@@ -242,7 +242,7 @@ To start the mobile application you will need a phone with the **Expo** applicat
 - Open the `mobile` folder:
 
   ```bash
-  cd ../mobile
+  cd mobile
   ```
 
 - Install dependencies with Yarn:
