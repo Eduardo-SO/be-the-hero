@@ -22,7 +22,7 @@ export default function Detail() {
   const route = useRoute();
 
   const { incident } = route.params;
-  const message = `Olá APAD, estou entrando em contato pois gostaria de ajudar no caso da "${incident.title}" com o valor de ${formatPrice(incident.value)}`;
+  const message = `Olá "${incident.name}", estou entrando em contato pois gostaria de ajudar no caso da "${incident.title}" com o valor de ${formatPrice(incident.value)}`;
 
   function sendMail() {
     MailComposer.composeAsync({
